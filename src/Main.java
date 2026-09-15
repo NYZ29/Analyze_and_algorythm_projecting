@@ -8,15 +8,22 @@ public class Main {
         try {
             List<String> lines = Files.readAllLines(Paths.get("INPUT.TXT"));
 
-            String line = lines.get(0);
-            int digit = Integer.parseInt(line.trim());
-            int number = digit * 100 + 90 + (9 - digit);
+            String[] words = lines.get(0).trim().split(" ");
+            int[] numbers = new int[words.length];
 
-            System.out.println(number);
-            Files.writeString(Paths.get("OUTPUT.TXT"), Integer.toString(number) + "\n");
+            for (int i = 0; i < words.length; i++) {
+                numbers[i] = Integer.parseInt(words[i]);
+            }
+
+            String answer = (numbers[0] * numbers[1] == numbers[2])
+                    ? "YES" : "NO";
+
+            System.out.println(answer);
+            Files.writeString(Paths.get("OUTPUT.TXT"), answer);
 
         } catch (IOException e) {
             System.err.println("Ошибка работы с файлами: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
