@@ -1,17 +1,13 @@
-import java.util.Arrays;
-
 public class Solution {
-    public int solve(int[] A) {
-        Arrays.sort(A);
-        int n = A.length;
+    public int[] wave(int[] A) {
+        java.util.Arrays.sort(A);
 
-        for (int i = 0; i < n; i++) {
-            if (i + 1 < n && A[i] == A[i + 1]) continue;
-
-            int greater = n - 1 - i;
-            if (A[i] == greater) return 1;
+        for (int i = 0; i < A.length - 1; i += 2) {
+            int temp = A[i];
+            A[i] = A[i + 1];
+            A[i + 1] = temp;
         }
 
-        return -1;
+        return A;
     }
 }
