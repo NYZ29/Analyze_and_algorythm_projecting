@@ -1,44 +1,39 @@
-class Solution {
-    public static String sortSentence(String s) {
-        String[] words = s.split(" ");
-        int n = words.length;
+import java.util.ArrayList;
 
-        String[] wordsWithoutNumbers = new String[n];
-        int[] numbers = new int[n];
+class Interval {
+    int start;
+    int end;
+    Interval() { start = 0; end = 0; }
+    Interval(int s, int e) { start = s; end = e; }
+}
 
-        for (int i = 0; i < n; i++) {
-            String word = words[i];
-            int wordLen = word.length();
+public class Solution {
+    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+        ArrayList<Interval> result = new ArrayList<>();
+        int i = 0;
+        int n = intervals.size();
 
-            wordsWithoutNumbers[i] = word.substring(0, wordLen - 1);
-            numbers[i] = Character.getNumericValue(word.charAt(wordLen - 1));
+        while (i < n && intervals.get(i).end < newInterval.start) {
+            result.add(intervals.get(i));
+            i++;
         }
 
-        bubbleSort(wordsWithoutNumbers, numbers, n);
+        int start = newInterval.start;
+        int end = newInterval.end;
 
-        String result = String.join(" ", wordsWithoutNumbers);
+        while (i < n && intervals.get(i).start <= end) {
+            start = Math.min(start, intervals.get(i).start);
+            end = Math.max(end, intervals.get(i).end);
+            i++;
+        }
+
+        result.add(new Interval(start, end));
+
+        while (i < n) {
+            result.add(intervals.get(i));
+            i++;
+        }
 
         return result;
-    }
-
-    private static void bubbleSort(String[] str, int[] nums, int n) {
-       for (int i = n - 1; i >= 0; i--) {
-           for (int j = 0; j < i; j++) {
-               if (nums[j] > nums[j + 1]) {
-                   int tempInt = nums[j];
-                   nums[j] = nums[j + 1];
-                   nums[j + 1] = tempInt;
-
-                   String tempString = str[j];
-                   str[j] = str[j + 1];
-                   str[j + 1] = tempString;
-               }
-           }
-       }
-    }
-
-    public static void main(String[] args) {
-        System.out.println();
-        System.out.println(sortSentence("KmPGxjHIpz2 xyicowi3 RULgvi1 DEMNWWBvRobvMSzOw5 tMWpM6 PRarH4"));
     }
 }

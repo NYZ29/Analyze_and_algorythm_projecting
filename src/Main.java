@@ -8,22 +8,21 @@ public class Main {
         try {
             List<String> lines = Files.readAllLines(Paths.get("INPUT.TXT"));
 
-            String str = lines.get(0).trim();
-            int maxLen = 0;
-            int curLen = 0;
+            int k = Integer.parseInt(lines.get(0).trim());
+            String[] weights = lines.get(1).trim().split("\\s+");
 
-            for (int i = 0; i < str.length(); i++) {
-                char c = str.charAt(i);
-
-                if (c == '0') {
-                    curLen++;
-                    if (maxLen < curLen) maxLen = curLen;
-                }
-                else curLen = 0;
+            int minWeight = Integer.MAX_VALUE;
+            int maxWeight = 0;
+            for (String w : weights) {
+                int weight = Integer.parseInt(w);
+                if (minWeight > weight) minWeight = weight;
+                if (maxWeight < weight) maxWeight = weight;
             }
 
-            System.out.println(maxLen);
-            Files.writeString(Paths.get("OUTPUT.TXT"), Integer.toString(maxLen));
+            StringBuilder answer = new StringBuilder().append(minWeight).append(" ").append(maxWeight);
+
+            System.out.println(answer);
+            Files.writeString(Paths.get("OUTPUT.TXT"), answer);
 
         } catch (IOException e) {
             System.err.println("Ошибка работы с файлами: " + e.getMessage());
