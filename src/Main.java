@@ -1,48 +1,13 @@
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
-            String[] parts = file.get(0).trim().split("\\s+");
+        ArrayList<Integer> A1 = new ArrayList<>(Arrays.asList(-6, -3, -1, 2, 4, 5));
 
-            long a = Long.parseLong(parts[0]);
-            long b = Long.parseLong(parts[1]);
-            long c = Long.parseLong(parts[2]);
-            long d = Long.parseLong(parts[3]);
+        ArrayList<Integer> A2 = new ArrayList<>(Arrays.asList(-5, -4, -2, 0, 1));
 
-            ArrayList<Integer> roots = new ArrayList<>();
-
-            for (int x = -100; x <= 100; x++) {
-                long val = ((a * x + b) * x + c) * x + d;
-                if (val == 0) roots.add(x);
-            }
-
-            Collections.sort(roots);
-            ArrayList<Integer> unique = new ArrayList<>();
-            if (!roots.isEmpty()) {
-                unique.add(roots.get(0));
-                for (int i = 1; i < roots.size(); i++) {
-                    if (!roots.get(i).equals(roots.get(i - 1))) {
-                        unique.add(roots.get(i));
-                    }
-                }
-            }
-
-            StringBuilder answer = new StringBuilder();
-            for (int u : unique) answer.append(u).append(" ");
-
-            System.out.println(answer);
-            Files.writeString(Paths.get("OUTPUT.TXT"), answer);
-
-        } catch (IOException e) {
-            System.err.println("Ошибка работы с файлами: " + e.getMessage());
-            e.printStackTrace();
-        }
+        System.out.println(Solution.solve(A1));
+        System.out.println(Solution.solve(A2));
     }
 }
