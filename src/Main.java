@@ -8,13 +8,11 @@ public class Main {
         try {
             List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
 
-            String cage = file.get(0).trim();
-            char letter = cage.charAt(0);
-            int number = cage.charAt(1) - '0';
+            long n = Long.parseLong(file.get(0).trim());
+            long min = (n / 6) + (7 - (n % 6)) % 7;
+            long max = n * 6;
+            String answer = min + " " + max;
 
-            String answer = (((letter - 'A') + (number - 1)) % 2 == 0) ? "BLACK" : "WHITE";
-
-            System.out.println(answer);
             Files.writeString(Paths.get("OUTPUT.TXT"), answer);
 
         } catch (IOException e) {
