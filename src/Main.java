@@ -8,28 +8,17 @@ public class Main {
         try {
             List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
 
-            String[] start = file.get(0).trim().split("\\s*:");
-            String[] period = file.get(1).trim().split("\\s+");
+            String cage = file.get(0).trim();
+            char letter = cage.charAt(0);
+            int number = cage.charAt(1) - '0';
 
-            int endMinute = Integer.parseInt(start[1]) + Integer.parseInt(period[1]);
-            int endHour = (Integer.parseInt(start[0]) + Integer.parseInt(period[0]) + (endMinute / 60)) % 24;
-            endMinute %= 60;
+            String answer = (((letter - 'A') + (number - 1)) % 2 == 0) ? "BLACK" : "WHITE";
 
-            StringBuilder end = new StringBuilder();
-
-            if (endHour < 10) end.append(0).append(endHour);
-            else end.append(endHour);
-            end.append(":");
-
-            if (endMinute < 10) end.append(0).append(endMinute);
-            else end.append(endMinute);
-
-            System.out.println(end);
-            Files.writeString(Paths.get("OUTPUT.TXT"), end);
+            System.out.println(answer);
+            Files.writeString(Paths.get("OUTPUT.TXT"), answer);
 
         } catch (IOException e) {
-            System.err.println("Ошибка работы с файлами: " + e.getMessage());
-            e.printStackTrace();
+
         }
     }
 }
