@@ -1,37 +1,52 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-    // DO NOT MODIFY THE LIST. IT IS READ ONLY
-    public static ArrayList<Integer> intersect(final List<Integer> A, final List<Integer> B) {
-        ArrayList<Integer> result = new ArrayList<>();
-        int i = 0, j = 0;
+    public static ArrayList<Integer> solve(ArrayList<ArrayList<Integer>> A) {
+        ArrayList<Integer> merged = new ArrayList<>();
+        int[] indexes = new int[A.size()];
+        int count = 0;
 
-        while (i < A.size() && j < B.size()) {
-            if (A.get(i).equals(B.get(j))) {
-                result.add(A.get(i));
-                i++; j++;
-            }
-            else if (A.get(i) > B.get(j)) j++;
-            else i++;
+        while (count < A.size() * A.get(0).size())
+            count = mergeKSortedArrays(A, merged, indexes, count);
+
+        return merged;
+    }
+
+    private static int mergeKSortedArrays(
+            ArrayList<ArrayList<Integer>> A,
+            ArrayList<Integer> merged,
+            int[] indexes,
+            int count
+    ) {
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < A.size(); i++) {
+            if (indexes[i] < A.get(i).size())
+                min = Math.min(min, A.get(i).get(indexes[i]));
         }
 
-        return result;
+        for (int i = 0; i < A.size(); i++) {
+            if (indexes[i] < A.get(i).size() && A.get(i).get(indexes[i]) == min) {
+                merged.add(A.get(i).get(indexes[i]));
+                indexes[i]++;
+                count++;
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {
-        int[] a = {1000};
-        int[] b1 = {1000};
+        ArrayList<ArrayList<Integer>> A = new ArrayList<>(
+                List.of(
+                        new ArrayList<>(List.of(1, 2, 3)),
+                        new ArrayList<>(List.of(2, 4, 6)),
+                        new ArrayList<>(List.of(0, 9, 10))
+                )
+        );
 
-        List<Integer> A = Arrays.stream(a)
-                .boxed()
-                .toList();
+        ArrayList<Integer> merged = solve(A);
 
-        List<Integer> B1 = Arrays.stream(b1)
-                .boxed()
-                .toList();
-
-        System.out.println(intersect(A, B1));
+        System.out.println(merged);
     }
 }
