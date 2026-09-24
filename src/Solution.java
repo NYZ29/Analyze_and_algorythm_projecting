@@ -1,20 +1,37 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
-    public static ArrayList<Integer> solve(ArrayList<Integer> A) {
-        int n = A.size();
-        if (n <= 1) return A;
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public static ArrayList<Integer> intersect(final List<Integer> A, final List<Integer> B) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int i = 0, j = 0;
 
-        int insertPose = 0;
-        for (int i = 0; i < n; i++) {
-            if (A.get(i) !=0) {
-                A.set(insertPose, A.get(i));
-                insertPose++;
+        while (i < A.size() && j < B.size()) {
+            if (A.get(i).equals(B.get(j))) {
+                result.add(A.get(i));
+                i++; j++;
             }
+            else if (A.get(i) > B.get(j)) j++;
+            else i++;
         }
 
-        for (int i = insertPose; i < n; i++) A.set(i, 0);
+        return result;
+    }
 
-        return A;
+    public static void main(String[] args) {
+        int[] a = {1000};
+        int[] b1 = {1000};
+
+        List<Integer> A = Arrays.stream(a)
+                .boxed()
+                .toList();
+
+        List<Integer> B1 = Arrays.stream(b1)
+                .boxed()
+                .toList();
+
+        System.out.println(intersect(A, B1));
     }
 }
