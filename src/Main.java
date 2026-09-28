@@ -1,39 +1,41 @@
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
+    public static void main(String[] args) throws IOException {
+        List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
 
-            String[] numbers = file.get(0).trim().split("\\s+");
+        int n = Integer.parseInt(file.get(0).trim());
+        String[] daysString = file.get(1).trim().split("\\s+");
+        ArrayList<Integer> oddDays = new ArrayList<>();
+        ArrayList<Integer> evenDays = new ArrayList<>();
 
-            int a = Integer.parseInt(numbers[0]);
-            int b = Integer.parseInt(numbers[1]);
+        for (int i = 0; i < n; i++) {
+            int day = Integer.parseInt(daysString[i]);
 
-            String answer = Integer.toString(NOD(a, b));
-
-            Files.writeString(Paths.get("OUTPUT.TXT"), answer);
-
-        } catch (IOException e) {
-
-        }
-    }
-
-    private static int NOD(int a, int b) {
-        int min = Math.min(a, b);
-        int max = a + b - min;
-
-        while (min > 0 && max > 0) {
-            if (max % min == 0) return min;
-
-            int temp = max % min;
-            max = min;
-            min = temp;
+            if (day % 2 == 0) evenDays.add(day);
+            else oddDays.add(day);
         }
 
-        return 1;
+        StringBuilder answer = new StringBuilder();
+
+        for (int day : oddDays) {
+            answer.append(day).append(" ");
+        }
+        answer.append("\n");
+
+        for (int day : evenDays) {
+            answer.append(day).append(" ");
+        }
+        answer.append("\n");
+
+        String yesORno = (evenDays.size() >= oddDays.size()) ? "YES" : "NO";
+        answer.append(yesORno);
+
+        System.out.println(answer);
+        Files.writeString(Paths.get("OUTPUT.TXT"), answer);
     }
 }
