@@ -1,34 +1,29 @@
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<String> file = Files.readAllLines(Paths.get("INPUT.TXT"));
+        List<String> input = Files.readAllLines(Paths.get("INPUT.TXT"));
+        String[] coordinates = input.get(0).trim().split("\\s+");
 
-        int n = Integer.parseInt(file.get(0).trim());
-        int[][] residents = new int[n][2];
-        int maxAge = Integer.MIN_VALUE;
+        long x1 = Long.parseLong(coordinates[0]);
+        long y1 = Long.parseLong(coordinates[1]);
+        long x2 = Long.parseLong(coordinates[2]);
+        long y2 = Long.parseLong(coordinates[3]);
+        long x3 = Long.parseLong(coordinates[4]);
+        long y3 = Long.parseLong(coordinates[5]);
 
-        for (int i = 0; i < n; i++) {
-            String[] ageAndGender = file.get(i + 1).trim().split("\\s+");
-            residents[i][0] = Integer.parseInt(ageAndGender[0]);
-            residents[i][1] = Integer.parseInt(ageAndGender[1]);
+        long doubleArea = Math.abs(
+                (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1)
+        );
 
-            if (residents[i][1] == 1) {
-                maxAge = Math.max(maxAge, residents[i][0]);
-            }
-        }
+        String answer;
 
-        String answer = "-1";
-
-        for (int i = 0; i < n; i++) {
-            if (residents[i][1] == 1 && residents[i][0] == maxAge) {
-                answer = Integer.toString(i + 1);
-                break;
-            }
-        }
+        if (doubleArea % 2 == 0) answer = Long.toString(doubleArea / 2);
+        else answer = (doubleArea / 2) + ".5";
 
         System.out.println(answer);
         Files.writeString(Paths.get("OUTPUT.TXT"), answer);
