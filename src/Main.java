@@ -1,27 +1,16 @@
 public class Main {
     public static void main(String[] args) throws java.io.IOException {
         String input = java.nio.file.Files.readString(java.nio.file.Paths.get("INPUT.TXT"));
-        char[] moves = input.toCharArray();
-        int[] thimbles = {1, 0, 0};
+        String[] legs = input.trim().split("\\s+");
+        int a = Integer.parseInt(legs[0]);
+        int b = Integer.parseInt(legs[1]);
 
-        for (char move : moves) {
-            if (move == 'A') swap(thimbles, 0, 1);
-            else if (move == 'B') swap(thimbles, 1, 2);
-            else swap(thimbles, 0, 2);
-        }
+        int minLegs = Math.min(a, b);
+        int maxLegs = a + b - minLegs;
 
-        String answer = " ";
-        for (int i = 0; i < 3; i++) {
-            if (thimbles[i] == 1) answer = Integer.toString(i + 1);
-        }
-        answer.trim();
+        int minBird = (maxLegs + 1) / 2;
+        int maxBird = minLegs;
 
-        java.nio.file.Files.writeString(java.nio.file.Paths.get("OUTPUT.TXT"), answer);
-    }
-
-    private static void swap(int[] array, int i, int j) {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        java.nio.file.Files.writeString(java.nio.file.Paths.get("OUTPUT.TXT"), (minBird + " " + maxBird));
     }
 }
