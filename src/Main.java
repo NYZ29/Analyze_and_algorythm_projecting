@@ -1,10 +1,20 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) throws java.io.IOException {
-        String input = java.nio.file.Files.readString(java.nio.file.Paths.get("INPUT.TXT"));
+        ArrayList<ArrayList<Integer>> A = new ArrayList<>(
+                List.of(
+                        new ArrayList<>(List.of(1, 2, 3)),
+                        new ArrayList<>(List.of(2, 4 ,6)),
+                        new ArrayList<>(List.of(0, 9, 10))
+                )
+        );
 
-        int n = Integer.parseInt(input.trim());
-        n--;
+        ArrayList<Integer> merged = Solution.solve(A);
 
-        java.nio.file.Files.writeString(java.nio.file.Paths.get("OUTPUT.TXT"), Integer.toString(n * n - n));
+        for (int num : merged) {
+            System.out.print(num + " ");
+        }
     }
 }
