@@ -7,11 +7,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int x = in.nextInt();
-        int y = in.nextInt();
-        int z = in.nextInt();
-
-        String answer = (x + y >= z) ? Integer.toString(x + y - z) : "Impossible";
+        int n = in.nextInt();
+        String answer = "0";
+        if (n > 1) answer = (n % 2 == 0) ? Integer.toString(n / 2) : Integer.toString(n);
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
