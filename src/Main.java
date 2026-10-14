@@ -7,9 +7,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int n = in.nextInt();
+        int w = in.nextInt();
+        int h = in.nextInt();
+        int r = in.nextInt();
 
-        String answer = (n > 0 && (n & (n - 1)) == 0) ? "YES" : "NO";
+        String answer = (w >= 2 * r && h >= 2 * r) ? "YES" : "NO";
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
