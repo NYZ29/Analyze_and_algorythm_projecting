@@ -7,16 +7,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int a = 0, b = 0;
-        for (int i = 0; i < 4; i++) {
-            a += in.nextInt();
-            b += in.nextInt();
-        }
+        int x = in.nextInt();
+        int y = in.nextInt();
+        int z = in.nextInt();
 
-        String answer = "";
-        if (a > b) answer = "1";
-        else if (a < b) answer = "2";
-        else answer = "DRAW";
+        String answer = (x + y >= z) ? Integer.toString(x + y - z) : "Impossible";
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
