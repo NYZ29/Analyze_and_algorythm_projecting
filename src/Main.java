@@ -7,13 +7,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        long c = in.nextLong();
-        long h = in.nextLong();
-        long o = in.nextLong();
+        int n = in.nextInt();
+        String answer = (n / 1000 == n % 10 && (n / 100) % 10 == (n / 10) % 10) ? "YES" : "NO";
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        out.println(Math.min(Math.min(c / 2, h / 6), o));
+        out.println(answer);
         out.close();
     }
 }
