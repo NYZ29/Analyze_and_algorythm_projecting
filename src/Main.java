@@ -9,16 +9,15 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
-        int aN = in.nextInt();
-        int aNPlus1 = in.nextInt();
+        int m = in.nextInt();
+        StringBuilder answer = new StringBuilder();
 
-        for (int i = n; i > 1; i--) {
-            int aNMinus1 = aNPlus1 - aN;
-            aNPlus1 = aN;
-            aN = aNMinus1;
-        }
+        if (n == 0 && m == 0) answer.append("0 0");
+        else if (n == 0) answer.append("Impossible");
+        else if (m == 0) answer.append(Integer.toString(n)).append(" ").append(Integer.toString(n));
+        else answer.append(Math.max(m, n)).append(" ").append(m + n - 1);
 
-        out.println(aN + " " + aNPlus1);
+        out.println(answer);
         out.close();
     }
 }
