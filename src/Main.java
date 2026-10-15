@@ -8,20 +8,16 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
-        int[] countOfTeams = new int[n];
+        int k1 = in.nextInt();
+        int l1 = in.nextInt();
+        int m1 = in.nextInt();
+        int k2 = in.nextInt();
+        int l2 = in.nextInt();
+        int m2 = in.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            countOfTeams[i] = in.nextInt();
-        }
-        int k = in.nextInt();
+        int good = Math.min(k1 - k1 / 100 * l1, k2 - k2 / 100 * l2);
 
-        int mxCount = 0;
-        for (int i = 0; i < n; i++) {
-            mxCount += Math.min(countOfTeams[i], k);
-        }
-
-        out.println(mxCount);
+        out.println((k1 - good) * m1 + (k2 - good) * m2);
         out.close();
     }
 }
