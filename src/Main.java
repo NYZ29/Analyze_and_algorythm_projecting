@@ -7,12 +7,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int a = in.nextInt();
-        int b = in.nextInt();
-        int c = in.nextInt();
-        int t = in.nextInt();
+        int x = in.nextInt();
+        int y = in.nextInt();
+        int z = in.nextInt();
 
-        int answer = (t <= a) ? t * b : a * b + (t - a) * c;
+        String answer = (x + y > z && x + z > y && y + z > x) ? "YES" : "NO";
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
