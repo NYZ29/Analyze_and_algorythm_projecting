@@ -8,24 +8,14 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
+        String line = in.nextLine();
+        boolean isKnownFact = true;
 
-        int heightOfBus = 437;
-        int bridgeWhereCrash = 0;
-
-        for (int i = 0; i < n && bridgeWhereCrash == 0; i++) {
-            int h = in.nextInt();
-
-            if (h <= heightOfBus) {
-                bridgeWhereCrash = i + 1;
-            }
+        for (int i = 0; i < line.length() && isKnownFact; i++) {
+            if (line.charAt(i) != '1') isKnownFact = false;
         }
 
-        StringBuilder answer = new StringBuilder();
-        if (bridgeWhereCrash == 0) answer.append("No crash");
-        else answer.append("Crash ").append(bridgeWhereCrash);
-
-        out.println(answer);
+        out.println((isKnownFact) ? "YES" : "NO");
         out.close();
     }
 }
