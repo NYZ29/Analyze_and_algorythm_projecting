@@ -8,12 +8,20 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int x1 = in.nextInt();
-        int y1 = in.nextInt();
-        int x2 = in.nextInt();
-        int y2 = in.nextInt();
+        int n = in.nextInt();
+        int[] countOfTeams = new int[n];
 
-        out.println((x1 + y1 - x2 - y2) % 2 != 0 ? "NO" : "YES");
+        for (int i = 0; i < n; i++) {
+            countOfTeams[i] = in.nextInt();
+        }
+        int k = in.nextInt();
+
+        int mxCount = 0;
+        for (int i = 0; i < n; i++) {
+            mxCount += Math.min(countOfTeams[i], k);
+        }
+
+        out.println(mxCount);
         out.close();
     }
 }
