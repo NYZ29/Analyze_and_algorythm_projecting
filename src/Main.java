@@ -9,18 +9,21 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
-        int len = 0;
-        int mxLen = 0;
+        int[] blueberries = new int[n];
 
         for (int i = 0; i < n; i++) {
-            int t = in.nextInt();
-
-            if (t > 0) len++;
-            else len = 0;
-            mxLen = Math.max(mxLen, len);
+            blueberries[i] = in.nextInt();
         }
 
-        out.println(mxLen);
+        int sum = blueberries[0] + blueberries[1] + blueberries[2];
+        int mxSum = sum;
+
+        for (int i = 3; i < n + 3; i++) {
+            sum = sum - blueberries[i - 3] + blueberries[i % n];
+            mxSum = Math.max(mxSum, sum);
+        }
+
+        out.println(mxSum);
         out.close();
     }
 }
