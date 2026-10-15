@@ -8,13 +8,24 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int k = in.nextInt();
         int n = in.nextInt();
 
-        int pageNumber = (int) Math.ceil(1.0 * n / k);
-        int rowNumber = n - (pageNumber - 1) * k;
+        int heightOfBus = 437;
+        int bridgeWhereCrash = 0;
 
-        out.println(pageNumber + " " + rowNumber);
+        for (int i = 0; i < n && bridgeWhereCrash == 0; i++) {
+            int h = in.nextInt();
+
+            if (h <= heightOfBus) {
+                bridgeWhereCrash = i + 1;
+            }
+        }
+
+        StringBuilder answer = new StringBuilder();
+        if (bridgeWhereCrash == 0) answer.append("No crash");
+        else answer.append("Crash ").append(bridgeWhereCrash);
+
+        out.println(answer);
         out.close();
     }
 }
