@@ -8,11 +8,12 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        long a = in.nextLong();
-        long b = in.nextLong();
-        double squareSide = Math.sqrt(a * b);
+        int x1 = in.nextInt();
+        int y1 = in.nextInt();
+        int x2 = in.nextInt();
+        int y2 = in.nextInt();
 
-        out.println((squareSide == (int)squareSide) ? (int)squareSide : 0);
+        out.println((x1 + y1 - x2 - y2) % 2 != 0 ? "NO" : "YES");
         out.close();
     }
 }
