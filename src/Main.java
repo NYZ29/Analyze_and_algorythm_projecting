@@ -8,11 +8,11 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
-        int i = in.nextInt();
-        int j = in.nextInt();
+        long a = in.nextLong();
+        long b = in.nextLong();
+        double squareSide = Math.sqrt(a * b);
 
-        out.println(Math.min(Math.abs(i - j) - 1, n - Math.abs(i - j) - 1));
+        out.println((squareSide == (int)squareSide) ? (int)squareSide : 0);
         out.close();
     }
 }
