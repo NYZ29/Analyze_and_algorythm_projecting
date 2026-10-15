@@ -8,14 +8,15 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        String line = in.nextLine();
-        boolean isKnownFact = true;
+        int n = in.nextInt();
+        int mxCount = 0;
 
-        for (int i = 0; i < line.length() && isKnownFact; i++) {
-            if (line.charAt(i) != '1') isKnownFact = false;
+        for (int i = 0; i < n; i++) {
+            mxCount += in.nextInt();
         }
+        mxCount = mxCount - n + 1;
 
-        out.println((isKnownFact) ? "YES" : "NO");
+        out.println(mxCount);
         out.close();
     }
 }
