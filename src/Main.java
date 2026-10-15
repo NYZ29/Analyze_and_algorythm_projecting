@@ -8,17 +8,11 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        String num = in.next();
-        int countOfCircles = 0;
+        int n = in.nextInt();
+        int i = in.nextInt();
+        int j = in.nextInt();
 
-        for (int i = 0; i < num.length(); i++) {
-            char digit = num.charAt(i);
-
-            if (digit == '0' || digit == '6' || digit == '9') countOfCircles++;
-            else if (digit == '8') countOfCircles += 2;
-        }
-
-        out.println(countOfCircles);
+        out.println(Math.min(Math.abs(i - j) - 1, n - Math.abs(i - j) - 1));
         out.close();
     }
 }
