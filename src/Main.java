@@ -9,9 +9,12 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int k = in.nextInt();
-        String word = in.next();
+        int n = in.nextInt();
 
-        out.println(word.substring(0, k - 1) + word.substring(k, word.length()));
+        int pageNumber = (int) Math.ceil(1.0 * n / k);
+        int rowNumber = n - (pageNumber - 1) * k;
+
+        out.println(pageNumber + " " + rowNumber);
         out.close();
     }
 }
