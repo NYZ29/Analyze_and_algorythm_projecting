@@ -7,15 +7,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int x = in.nextInt();
-        int y = in.nextInt();
-        int z = in.nextInt();
-
-        String answer = (x + y > z && x + z > y && y + z > x) ? "YES" : "NO";
+        int k = in.nextInt();
+        String[] flowerPermutations = {"GCV", "GVC", "VGC", "VCG", "CVG", "CGV"};
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        out.println(answer);
+        out.println(flowerPermutations[(k % 3) * 2]);
         out.close();
     }
 }
