@@ -7,12 +7,13 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("INPUT.TXT"));
 
-        int m = in.nextInt();
-        int n = in.nextInt();
+        long c = in.nextLong();
+        long h = in.nextLong();
+        long o = in.nextLong();
 
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        out.println(m * n - m - n + 1);
+        out.println(Math.min(Math.min(c / 2, h / 6), o));
         out.close();
     }
 }
