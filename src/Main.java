@@ -8,16 +8,19 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int k1 = in.nextInt();
-        int l1 = in.nextInt();
-        int m1 = in.nextInt();
-        int k2 = in.nextInt();
-        int l2 = in.nextInt();
-        int m2 = in.nextInt();
+        int n = in.nextInt();
+        int len = 0;
+        int mxLen = 0;
 
-        int good = Math.min(k1 - k1 / 100 * l1, k2 - k2 / 100 * l2);
+        for (int i = 0; i < n; i++) {
+            int t = in.nextInt();
 
-        out.println((k1 - good) * m1 + (k2 - good) * m2);
+            if (t > 0) len++;
+            else len = 0;
+            mxLen = Math.max(mxLen, len);
+        }
+
+        out.println(mxLen);
         out.close();
     }
 }
