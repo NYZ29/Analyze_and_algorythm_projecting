@@ -8,12 +8,27 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int count = 0;
-        for (int i = 0; i < 31; i++) {
-            count += in.nextInt();
+        int n = in.nextInt();
+        int m = in.nextInt();
+
+        int mnTime = Integer.MAX_VALUE;
+        String nameOfWinner = "";
+
+        for (int i = 0; i < n; i++) {
+            String name = in.next();
+            int time = 0;
+
+            for (int j = 0; j < m; j++) {
+                time += in.nextInt();
+            }
+
+            if (time < mnTime) {
+                mnTime = time;
+                nameOfWinner = name;
+            }
         }
 
-        out.println(count / 27);
+        out.println(nameOfWinner);
         out.close();
     }
 }
