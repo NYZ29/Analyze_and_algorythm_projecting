@@ -8,27 +8,20 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
         int m = in.nextInt();
+        int n = in.nextInt();
+        int i = in.nextInt();
+        int j = in.nextInt();
+        int c = in.nextInt();
 
-        int mnTime = Integer.MAX_VALUE;
-        String nameOfWinner = "";
+        String answer = "equal";
 
-        for (int i = 0; i < n; i++) {
-            String name = in.next();
-            int time = 0;
-
-            for (int j = 0; j < m; j++) {
-                time += in.nextInt();
-            }
-
-            if (time < mnTime) {
-                mnTime = time;
-                nameOfWinner = name;
-            }
+        if (m % 2 != 0 && n % 2 != 0) {
+            if ((i + j) % 2 == 0) answer = (c == 0) ? "black" : "white";
+            else answer = answer = (c == 1) ? "black" : "white";
         }
 
-        out.println(nameOfWinner);
+        out.println(answer);
         out.close();
     }
 }
