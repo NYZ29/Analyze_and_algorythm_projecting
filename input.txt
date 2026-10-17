@@ -1,4 +1,5 @@
-Space Team
-von der Leyen
-de Gea
-von Bismarck
+4 6
+AA.BBB
+A....B
+AAA..B
+A..BBB

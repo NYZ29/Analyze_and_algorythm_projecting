@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -9,20 +8,22 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        StringBuilder answer = new StringBuilder().append(in.nextLine()).append(": ");
-        ArrayList<String> names = new ArrayList<>(3);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        int mnCount = Integer.MAX_VALUE;
+        in.nextLine();
 
-        for (int i = 0; i < 3; i++) {
-            names.add(in.nextLine());
+        for (int i = 0; i < n; i++) {
+            String line = in.nextLine();
+            int first = line.indexOf('.');
+            int last = line.lastIndexOf('.');
+
+            int count = (int)line.chars().filter(c -> c == '.').count();
+
+            mnCount = Math.min(mnCount, count);
         }
-        names.sort(null);
 
-        for (int i = 0; i < 3; i++) {
-            answer.append(names.get(i));
-            if (i < 2) answer.append(", ");
-        }
-
-        out.println(answer);
+        out.println(mnCount);
         out.close();
     }
 }
