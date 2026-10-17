@@ -8,20 +8,16 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int m = in.nextInt();
-        int n = in.nextInt();
-        int i = in.nextInt();
-        int j = in.nextInt();
-        int c = in.nextInt();
+        int x = in.nextInt();
+        int y = in.nextInt();
 
-        String answer = "equal";
-
-        if (m % 2 != 0 && n % 2 != 0) {
-            if ((i + j) % 2 == 0) answer = (c == 0) ? "black" : "white";
-            else answer = answer = (c == 1) ? "black" : "white";
+        int winner = 0;
+        if (x != 1 || y != 1) {
+            if (x == y) winner = 2;
+            else winner = 1;
         }
 
-        out.println(answer);
+        out.println(winner);
         out.close();
     }
 }
