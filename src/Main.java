@@ -9,21 +9,15 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
-        int m = in.nextInt();
-        int mnCount = Integer.MAX_VALUE;
         in.nextLine();
+        int count = 0;
 
         for (int i = 0; i < n; i++) {
-            String line = in.nextLine();
-            int first = line.indexOf('.');
-            int last = line.lastIndexOf('.');
-
-            int count = (int)line.chars().filter(c -> c == '.').count();
-
-            mnCount = Math.min(mnCount, count);
+            String grammatic = in.nextLine();
+            if (grammatic.charAt(0) == grammatic.charAt(3)) count++;
         }
 
-        out.println(mnCount);
+        out.println(count);
         out.close();
     }
 }

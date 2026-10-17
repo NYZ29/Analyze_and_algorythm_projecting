@@ -1,5 +1,4 @@
-4 6
-AA.BBB
-A....B
-AAA..B
-A..BBB
+3
+S->Sabc
+S->A
+A->AA
