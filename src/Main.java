@@ -8,15 +8,9 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int sum = in.nextInt();
-        int k = 0;
+        int n = in.nextInt();
 
-        while (sum > 0) {
-            k++;
-            sum -= k;
-        }
-
-        out.println(k);
+        out.println(n / 24 * 13 + " " + n / 24 * 4 + " " + n / 24 * 7);
         out.close();
     }
 }
