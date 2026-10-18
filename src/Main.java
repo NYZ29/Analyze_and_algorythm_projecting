@@ -1,24 +1,26 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Scanner in = new Scanner(new File("INPUT.TXT")).useLocale(Locale.US);
+        Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        double x = in.nextDouble();
-        double sum = 0.0;
-        int k = 2;
+        int n = in.nextInt();
+        long sum = 0L;
+        long plus = 3L;
 
-        while (x > sum) {
-            sum += 1.0 / k;
-            k++;
+        for (int i = 0; i < n; i++) {
+            if (in.nextInt() == 1){
+                sum += plus;
+                plus++;
+            }
+            else plus = Math.max(plus - 3, 3);
         }
 
-        out.println(k - 2 + " card(s)");
+        out.println(sum);
         out.close();
     }
 }
