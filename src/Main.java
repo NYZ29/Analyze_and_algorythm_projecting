@@ -8,16 +8,12 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        long n = in.nextLong();
-        long m = in.nextLong();
-        long f = in.nextLong();
-        long l = in.nextLong();
+        String whereBought = in.nextLine();
+        int x = in.nextInt();
 
-        long both = m + f - (n - l);
-        long math = m - both;
-        long physics = f - both;
+        String ans = (x % 2 == 0 && whereBought.equals("School")) ? ans = "No" : "Yes";
 
-        out.println(both + " " + math + " " + physics);
+        out.println(ans);
         out.close();
     }
 }
