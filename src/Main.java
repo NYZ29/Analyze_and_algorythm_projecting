@@ -8,17 +8,17 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
+        int n = in.nextInt();
+        int m = in.nextInt();
         int k = in.nextInt();
-        int speed = (20 - 8) * (60 / 10) * 2 + 1;
 
-        StringBuilder answer = new StringBuilder();
-        if (k > speed) answer.append("NO");
-        else {
-            int neededTime = (k - 1) * 5;
-            answer.append(neededTime / 60).append(' ').append(neededTime % 60);
+        int maxWhite = 0;
+
+        for (int i = 1; i <= m; i++) {
+            maxWhite = Math.max(maxWhite, i % k);
         }
 
-        out.println(answer);
+        out.println((m / k + maxWhite) * n);
         out.close();
     }
 }
