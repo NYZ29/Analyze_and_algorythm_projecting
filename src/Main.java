@@ -8,19 +8,16 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        String E = "2.7182818284590452353602875";
-        int n = in.nextInt();
+        long n = in.nextLong();
+        long m = in.nextLong();
+        long f = in.nextLong();
+        long l = in.nextLong();
 
-        StringBuilder ans = new StringBuilder();
+        long both = m + f - (n - l);
+        long math = m - both;
+        long physics = f - both;
 
-        if (n == 0) ans.append(3);
-        else {
-            ans.append(E.substring(0, n + 1));
-            if (E.length() > n + 2 && E.charAt(n + 2) >= '5') ans.append(E.charAt(n + 1) - '0' + 1);
-            else ans.append(E.charAt(n + 1));
-        }
-
-        out.println(ans);
+        out.println(both + " " + math + " " + physics);
         out.close();
     }
 }
