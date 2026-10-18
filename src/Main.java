@@ -8,12 +8,16 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        String whereBought = in.nextLine();
-        int x = in.nextInt();
+        int n = in.nextInt();
+        int start = 1;
+        int end = 31;
 
-        String ans = (x % 2 == 0 && whereBought.equals("School")) ? ans = "No" : "Yes";
+        for (int i = 0; i < n; i++) {
+            start = Math.max(start, in.nextInt());
+            end = Math.min(end, in.nextInt());
+        }
 
-        out.println(ans);
+        out.println((start <= end) ? "YES" : "NO");
         out.close();
     }
 }
