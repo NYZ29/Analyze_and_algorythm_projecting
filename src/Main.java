@@ -8,23 +8,25 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int[] sequence = in.nextLine().chars().map(c -> c -'0').toArray();
-        int floor = 0;
-        int mnFloor = 0;
-        int mxFloor = 0;
+        int n = in.nextInt();
+        int[] taxes = new int[n];
 
-        for (int seq : sequence) {
-            if (seq == 1) {
-                floor++;
-                mxFloor = Math.max(mxFloor, floor);
-            }
-            else {
-                floor--;
-                mnFloor = Math.min(mnFloor, floor);
+        int maxTax = -1;
+        int numberOfMax = 0;
+
+        for (int i = 0; i < n; i++) {
+            taxes[i] = in.nextInt();
+        }
+        for (int i = 0; i < n; i++) {
+            taxes[i] *= in.nextInt();
+
+            if (taxes[i] > maxTax) {
+                maxTax = taxes[i];
+                numberOfMax = i + 1;
             }
         }
 
-        out.println(mxFloor - mnFloor + 1);
+        out.println(numberOfMax);
         out.close();
     }
 }
