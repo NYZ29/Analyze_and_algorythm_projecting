@@ -8,25 +8,17 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
-        int[] taxes = new int[n];
+        int k = in.nextInt();
+        int speed = (20 - 8) * (60 / 10) * 2 + 1;
 
-        int maxTax = -1;
-        int numberOfMax = 0;
-
-        for (int i = 0; i < n; i++) {
-            taxes[i] = in.nextInt();
-        }
-        for (int i = 0; i < n; i++) {
-            taxes[i] *= in.nextInt();
-
-            if (taxes[i] > maxTax) {
-                maxTax = taxes[i];
-                numberOfMax = i + 1;
-            }
+        StringBuilder answer = new StringBuilder();
+        if (k > speed) answer.append("NO");
+        else {
+            int neededTime = (k - 1) * 5;
+            answer.append(neededTime / 60).append(' ').append(neededTime % 60);
         }
 
-        out.println(numberOfMax);
+        out.println(answer);
         out.close();
     }
 }
