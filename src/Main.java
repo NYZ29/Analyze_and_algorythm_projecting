@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -9,29 +10,18 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
        int n = in.nextInt();
-       int[] colors = new int[101];
+       int v = in.nextInt();
+       int l = in.nextInt();
+
+       int dopTime = 0;
 
        for (int i = 0; i < n; i++) {
-           colors[in.nextInt()]++;
+           if (in.nextInt() <= l) dopTime += in.nextInt();
        }
 
-       int maxCount = 0;
-       for (int i = 0; i < 101; i++) {
-           maxCount = Math.max(maxCount, colors[i]);
-       }
+       double allTime = 60.00 * l / v + dopTime;
 
-       int countMaxColor = 0;
-       int indexMaxColor = 0;
-       for (int i = 0; i < 101; i++) {
-           if (colors[i] == maxCount) {
-               countMaxColor++;
-               indexMaxColor = i;
-           }
-       }
-
-       if (countMaxColor == 1) out.println(indexMaxColor);
-       else out.println(0);
-
+       out.printf(Locale.US, "%.2f%n", allTime);
        out.close();
     }
 }
