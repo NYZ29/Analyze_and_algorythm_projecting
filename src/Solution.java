@@ -1,25 +1,29 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
-    public static int solve(ArrayList<Integer> A, int B) {
-        if (A.get(A.size() - 1) <= B) return A.size();
-
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public static ArrayList<Integer> searchRange(final List<Integer> A, int B) {
         int l = 0, r = A.size() - 1;
-        int ans = -1;
+        int indexOfB = -1;
 
         while (l <= r) {
             int m = (l + r) / 2;
-            if (A.get(m) == B + 1) {
-                ans = m;
+            if (A.get(m) == B) {
+                indexOfB = m;
                 break;
             }
-            if (A.get(m) < B + 1) l = m + 1;
+            if (A.get(m) < B) l = m + 1;
             else r = m - 1;
         }
-        if (ans == -1) ans = l;
 
-        while (ans > 1 && A.get(ans - 1) > B) ans--;
+        if (indexOfB == -1) return new ArrayList<Integer>(Arrays.asList(-1, -1));
 
-        return ans;
+        int first = indexOfB, last = indexOfB;
+        while (first > 0 && A.get(first - 1) == B) first--;
+        while (last < A.size() - 1 && A.get(last + 1) == B) last++;
+
+        return new ArrayList<Integer>(Arrays.asList(first, last));
     }
 }
