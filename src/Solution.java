@@ -2,47 +2,23 @@ import java.util.ArrayList;
 
 public class Solution {
     public static int solve(ArrayList<Integer> A, int B) {
+        if (A.get(A.size() - 1) <= B) return A.size();
+
         int l = 0, r = A.size() - 1;
-        int indexOfMax = -1;
-
-        while (l <= r) {
-            int m = (l + r) / 2;
-            if (A.get(m) > A.get(m - 1) && A.get(m) > A.get(m + 1)) {
-                indexOfMax = m;
-                break;
-            }
-            if (A.get(m) > A.get(m - 1)) l = m + 1;
-            else r = m - 1;
-        }
-
-        l = 0;
-        r = indexOfMax;
         int ans = -1;
 
         while (l <= r) {
             int m = (l + r) / 2;
-            if (A.get(m) == B) {
+            if (A.get(m) == B + 1) {
                 ans = m;
                 break;
             }
-            if (A.get(m) < B) l = m + 1;
+            if (A.get(m) < B + 1) l = m + 1;
             else r = m - 1;
         }
+        if (ans == -1) ans = l;
 
-        if (ans == -1) {
-            l = indexOfMax;
-            r = A.size() - 1;
-
-            while (l <= r) {
-                int m = (l + r) / 2;
-                if (A.get(m) == B) {
-                    ans = m;
-                    break;
-                }
-                if (A.get(m) > B) l = m + 1;
-                else r = m - 1;
-            }
-        }
+        while (ans > 1 && A.get(ans - 1) > B) ans--;
 
         return ans;
     }
