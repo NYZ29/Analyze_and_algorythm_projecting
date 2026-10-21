@@ -1,106 +1,48 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
-    public static ArrayList<Integer> solve(ArrayList<ArrayList<Integer>> A) {
-        ArrayList<Integer> merged = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> indexesAndValues = new ArrayList<>();
+    public static ArrayList<Integer> dNums(ArrayList<Integer> A, int B) {
+        int n = A.size();
+        if (B > n) return new ArrayList<>();
 
-        for (int i = 0; i < A.size(); i++) {
-            addToHeap(A, indexesAndValues, i, 0);
-        }
-
-        int total = 0;
-        for (ArrayList<Integer> row : A) {
-            total += row.size();
-        }
-
-        while (merged.size() < total) {
-            merged.add(minDel(A, indexesAndValues));
-        }
-
-        return merged;
-    }
-
-    private static void addToHeap(
-            ArrayList<ArrayList<Integer>> A,
-            ArrayList<ArrayList<Integer>> indexesAndValues,
-            int i,
-            int j
-    ) {
-        indexesAndValues.add(new ArrayList<>(Arrays.asList(i, j, A.get(i).get(j))));
-
-        int k = indexesAndValues.size() - 1;
-
-        while (k > 0 && indexesAndValues.get(k).get(2) < indexesAndValues.get((k - 1) / 2).get(2)) {
-            swap(indexesAndValues, k, (k - 1) / 2);
-
-            k = (k - 1) / 2;
-        }
-    }
-
-    private static int minDel(
-            ArrayList<ArrayList<Integer>> A,
-            ArrayList<ArrayList<Integer>> indexesAndValues
-    ) {
-        int iRow = indexesAndValues.get(0).get(0);
-        int jCol = indexesAndValues.get(0).get(1);
-        int ans = indexesAndValues.get(0).get(2);
-
-        jCol++;
-
-        int s = indexesAndValues.size() - 1;
-
-        if (jCol < A.get(iRow).size()) {
-            indexesAndValues.get(0).set(1, jCol);
-            int temp = A.get(iRow).get(jCol);
-            indexesAndValues.get(0).set(2, temp);
-
-            int k = 0;
-
-            while (2 * k + 1 <= s) {
-                int m = 2 * k + 1;
-
-                if (m + 1 <= s && indexesAndValues.get(m).get(2) > indexesAndValues.get(m + 1).get(2)) m++;
-
-                if (indexesAndValues.get(k).get(2) <= indexesAndValues.get(m).get(2)) break;
-
-                swap(indexesAndValues, k, m);
-                k = m;
+        ArrayList<Integer> ans = new ArrayList<>(n - B + 1);
+        if (B == 1) {
+            for (int i = 0; i < n; i++) {
+                ans.add(1);
             }
-        } else {
-            if (s == 0) {
-                indexesAndValues.remove(0);
-            } else {
-                swap(indexesAndValues, 0, s);
-                indexesAndValues.remove(s);
-                s--;
+            return ans;
+        }
 
-                int k = 0;
+        Map<Integer, Integer> numbers = new HashMap<>(B);
 
-                while (2 * k + 1 <= s) {
-                    int m = 2 * k + 1;
+        for (int i = 0; i < B; i++) {
+            addNumber(numbers, A.get(i));
+        }
+        ans.add(numbers.size());
 
-                    if (m + 1 <= s && indexesAndValues.get(m).get(2) > indexesAndValues.get(m + 1).get(2)) m++;
+        for (int right = B; right < n; right++) {
+            int left = right - B;
 
-                    if (indexesAndValues.get(k).get(2) <= indexesAndValues.get(m).get(2)) break;
+            addNumber(numbers, A.get(right));
+            removeNumber(numbers, A.get(left));
 
-                    swap(indexesAndValues, k, m);
-                    k = m;
-                }
-            }
+            ans.add(numbers.size());
         }
 
         return ans;
     }
 
-    private static void swap(
-            ArrayList<ArrayList<Integer>> indexesAndValues,
-            int i,
-            int j
-    ) {
-        ArrayList<Integer> temp = indexesAndValues.get(i);
-        indexesAndValues.set(i, indexesAndValues.get(j));
-        indexesAndValues.set(j, temp);
+    private static void addNumber(Map<Integer, Integer> numbers, int value) {
+        numbers.merge(value, 1, Integer::sum);
+    }
+
+    private static void removeNumber(Map<Integer, Integer> numbers, int value) {
+        numbers.merge(value, -1, Integer::sum);
+
+        if (numbers.get(value) == 0) {
+            numbers.remove(value);
+        }
     }
 }

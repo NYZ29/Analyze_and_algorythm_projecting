@@ -1,22 +1,16 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Scanner in = new Scanner(new File("INPUT.TXT"));
-        PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
+    public static void main(String[] args) {
+        ArrayList<Integer> A1 = new ArrayList<>(List.of(1,2,1,3,4,3));
+        int B1 = 3;
 
-        int n = in.nextInt();
-        int count = 0;
+        System.out.println(Solution.dNums(A1, B1));
 
-        while (n > 0) {
-            count += (n % 2);
-            n /= 2;
-        }
+        ArrayList<Integer> A2 = new ArrayList<>(List.of(1,1,2,2));
+        int B2 = 1;
 
-        out.println(count);
-        out.close();
+        System.out.println(Solution.dNums(A2, B2));
     }
 }
