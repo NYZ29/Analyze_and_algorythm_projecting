@@ -3,10 +3,14 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int a1 = 2147483647;
-        System.out.println(Solution.sqrt(a1));
+        ArrayList<Integer> a1 = new ArrayList<>(List.of(12, 34, 67, 90));
+        int b1 = 2;
 
-        int a2 = 930675566;
-        System.out.println(Solution.sqrt(a2));
+        System.out.println(Solution.books(a1, b1));
+
+        ArrayList<Integer> a2 = new ArrayList<>(List.of(73, 58, 30, 72, 44, 78, 23, 9));
+        int b2 = 5;
+
+        System.out.println(Solution.books(a2, b2));
     }
 }
