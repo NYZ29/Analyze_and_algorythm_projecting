@@ -1,25 +1,49 @@
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 public class Solution {
     public static int solve(ArrayList<Integer> A, int B) {
-        int n = A.size();
+        int l = 0, r = A.size() - 1;
+        int indexOfMax = -1;
 
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
-
-        for (int i = 0; i < n; i++) {
-            maxHeap.offer(A.get(i));
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (A.get(m) > A.get(m - 1) && A.get(m) > A.get(m + 1)) {
+                indexOfMax = m;
+                break;
+            }
+            if (A.get(m) > A.get(m - 1)) l = m + 1;
+            else r = m - 1;
         }
 
-        int sum = 0;
-        for (int i = 0; i < B; i++) {
-            int max = maxHeap.poll();
-            sum += max;
+        l = 0;
+        r = indexOfMax;
+        int ans = -1;
 
-            if (max > 0) maxHeap.offer(max - 1);
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (A.get(m) == B) {
+                ans = m;
+                break;
+            }
+            if (A.get(m) < B) l = m + 1;
+            else r = m - 1;
         }
 
-        return sum;
+        if (ans == -1) {
+            l = indexOfMax;
+            r = A.size() - 1;
+
+            while (l <= r) {
+                int m = (l + r) / 2;
+                if (A.get(m) == B) {
+                    ans = m;
+                    break;
+                }
+                if (A.get(m) > B) l = m + 1;
+                else r = m - 1;
+            }
+        }
+
+        return ans;
     }
 }
