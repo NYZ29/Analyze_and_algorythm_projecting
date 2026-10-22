@@ -9,17 +9,15 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        int n = in.nextInt();
-        double S = 0;
-        int h1 = in.nextInt();
+        int maxEven = Integer.MIN_VALUE;
+        int minOdd = Integer.MAX_VALUE;
 
-        for (int i = 1; i < n; i++) {
-            int h2 = in.nextInt();
-            S += (h1 + h2) / 2.0;
-            h1 = h2;
+        while (in.hasNext()) {
+            minOdd = Math.min(minOdd, in.nextInt());
+            if (in.hasNext()) maxEven = Math.max(maxEven, in.nextInt());
         }
 
-        out.printf(Locale.US, "%.6f", S / (n - 1));
+        out.println(maxEven + minOdd);
         out.close();
     }
 }
