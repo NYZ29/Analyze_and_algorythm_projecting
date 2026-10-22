@@ -1,16 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        ArrayList<Integer> a1 = new ArrayList<>(List.of(12, 34, 67, 90));
-        int b1 = 2;
+    public static void main(String[] args) throws Exception {
+        Scanner in = new Scanner(new File("INPUT.TXT"));
+        PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-        System.out.println(Solution.books(a1, b1));
+        int n = in.nextInt();
+        int[] c = new int[n];
 
-        ArrayList<Integer> a2 = new ArrayList<>(List.of(73, 58, 30, 72, 44, 78, 23, 9));
-        int b2 = 5;
+        for (int i = 0; i < n; i++) {
+            c[i] = in.nextInt();
+        }
 
-        System.out.println(Solution.books(a2, b2));
+        int k = in.nextInt();
+        int[] counts = new int[n];
+
+        for (int i = 0; i < k; i++) {
+            counts[in.nextInt() - 1]++;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (c[i] < counts[i]) out.println("yes");
+            else out.println("no");
+        }
+
+        out.close();
     }
 }
