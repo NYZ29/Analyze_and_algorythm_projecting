@@ -1,1 +1,5 @@
-60.00
+yes
+no
+no
+no
+yes

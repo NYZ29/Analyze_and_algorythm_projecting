@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -9,19 +8,25 @@ public class Main {
         Scanner in = new Scanner(new File("INPUT.TXT"));
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
-       int n = in.nextInt();
-       int v = in.nextInt();
-       int l = in.nextInt();
+        int n = in.nextInt();
+        int[] c = new int[n];
 
-       int dopTime = 0;
+        for (int i = 0; i < n; i++) {
+            c[i] = in.nextInt();
+        }
 
-       for (int i = 0; i < n; i++) {
-           if (in.nextInt() <= l) dopTime += in.nextInt();
-       }
+        int k = in.nextInt();
+        int[] counts = new int[n];
 
-       double allTime = 60.00 * l / v + dopTime;
+        for (int i = 0; i < k; i++) {
+            counts[in.nextInt() - 1]++;
+        }
 
-       out.printf(Locale.US, "%.2f%n", allTime);
-       out.close();
+        for (int i = 0; i < n; i++) {
+            if (c[i] < counts[i]) out.println("yes");
+            else out.println("no");
+        }
+
+        out.close();
     }
 }
