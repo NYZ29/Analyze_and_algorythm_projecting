@@ -1,56 +1,36 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Solution {
-    public static int books(ArrayList<Integer> A, int B) {
-        int n = A.size();
+    public static ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> A) {
+        Collections.sort(A);
 
-        if (n == 0 || B <= 0 || n < B) {
-            return -1;
-        }
+        ArrayList<ArrayList<Integer>> dp = new ArrayList<>();
+        dp.add(new ArrayList<>());
 
-        long low = 0;
-        long high = 0;
+        for (int x : A) {
+            int size = dp.size();
 
-        for (int pages : A) {
-            low = Math.max(low, pages);
-            high += pages;
-        }
-
-        long ans = high;
-
-        while (low <= high) {
-            long mid = (low + high) / 2;
-
-            if (canAllocate(A, B, mid)) {
-                ans = mid;
-                high = mid - 1;
-            } else {
-                low = mid + 1;
+            for (int i = 0; i < size; i++) {
+                ArrayList<Integer> next = new ArrayList<>(dp.get(i));
+                next.add(x);
+                dp.add(next);
             }
         }
 
-        return (int) ans;
-    }
+        dp.sort((a, b) -> {
+            int n = Math.min(a.size(), b.size());
 
-    private static boolean canAllocate(ArrayList<Integer> A, int B, long limit) {
-        long currentPages = 0;
-        int students = 1;
-
-        for (int pages : A) {
-            if (pages > limit) return false;
-
-            if (currentPages + pages <= limit) {
-                currentPages += pages;
-            } else {
-                students++;
-                currentPages = pages;
-
-                if (students > B) {
-                    return false;
+            for (int i = 0; i < n; i++) {
+                int cmp = Integer.compare(a.get(i), b.get(i));
+                if (cmp != 0) {
+                    return cmp;
                 }
             }
-        }
 
-        return true;
+            return Integer.compare(a.size(), b.size());
+        });
+
+        return dp;
     }
 }
