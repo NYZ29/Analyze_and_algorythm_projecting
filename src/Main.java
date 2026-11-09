@@ -9,17 +9,20 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
+        if (n == 1) out.println(1);
+        else {
+            int sqrt = (int) Math.sqrt(1.0 * n) + 1;
+            long sum = 0L;
 
-        int d1 = n / 100_000;
-        int d2 = (n / 10_000) % 10;
-        int d3 = (n / 1_000) % 10;
-        int d4 = (n / 100) % 10;
-        int d5 = (n / 10) % 10;
-        int d6 = n % 10;
+            for (int i = 1; i < sqrt; i++) {
+                if (n % i == 0) {
+                    sum += i;
+                    if (i * i != n) sum += (n / i);
+                }
+            }
 
-        if (d1 + d2 + d3 == d4 + d5 + d6) out.println("YES");
-        else out.println("NO");
-
+            out.println(sum);
+        }
         out.close();
     }
 }
