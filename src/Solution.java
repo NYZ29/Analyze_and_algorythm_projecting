@@ -1,36 +1,31 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
-    public static ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> A) {
-        Collections.sort(A);
+    public static ArrayList<ArrayList<Integer>> combinationSum(ArrayList<Integer> a, int b) {
+        Set<ArrayList<Integer>> answer = new HashSet<>();
+        Collections.sort(a);
 
-        ArrayList<ArrayList<Integer>> dp = new ArrayList<>();
-        dp.add(new ArrayList<>());
+        int n = a.size();
 
-        for (int x : A) {
-            int size = dp.size();
+        int N = 1 << n;
+        for (int q = 0; q < N; q++) {
+            int s = 0;
+            ArrayList<Integer> ans = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
 
-            for (int i = 0; i < size; i++) {
-                ArrayList<Integer> next = new ArrayList<>(dp.get(i));
-                next.add(x);
-                dp.add(next);
+                if ((q & (1 << i)) != 0) {
+                    s += a.get(i);
+                    ans.add(a.get(i));
+                }
+            }
+            if (s == b) {
+                answer.add(ans);
             }
         }
 
-        dp.sort((a, b) -> {
-            int n = Math.min(a.size(), b.size());
-
-            for (int i = 0; i < n; i++) {
-                int cmp = Integer.compare(a.get(i), b.get(i));
-                if (cmp != 0) {
-                    return cmp;
-                }
-            }
-
-            return Integer.compare(a.size(), b.size());
-        });
-
-        return dp;
+        return new ArrayList<>(answer);
     }
 }
