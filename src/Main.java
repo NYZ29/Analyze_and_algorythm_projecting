@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -18,23 +19,43 @@ public class Main {
             }
         }
 
-        int[][] dp = new int[n][m];
-        dp[0][0] = matrix[0][0];
+        long[][] dp = new long[n][m];
+        dp[n - 1][m - 1] = 1;
 
-        for (int i = 1; i < n; i++) {
-            dp[i][0] = dp[i - 1][0] + matrix[i][0];
-        }
-        for (int j = 1; j < m; j++) {
-            dp[0][j] = dp[0][j - 1] + matrix[0][j];
-        }
+        for (int i = n - 2; i >= 0; i--) {
+            int k = matrix[i][m - 1];
 
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + matrix[i][j];
+            if (k > 0 && i + k < n) {
+                dp[i][m - 1] = dp[i + k][m - 1];
             }
         }
 
-        out.println(dp[n - 1][m - 1]);
+        for (int j = m - 2; j >= 0; j--) {
+            int k = matrix[n - 1][j];
+
+            if (k > 0 && j + k < m) {
+                dp[n - 1][j] = dp[n - 1][j + k];
+            }
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = m - 2; j >= 0; j--) {
+                int k = matrix[i][j];
+                long ways = 0;
+
+                if (k > 0 && i + k < n) {
+                    ways += dp[i + k][j];
+                }
+
+                if (k > 0 && j + k < m) {
+                    ways += dp[i][j + k];
+                }
+
+                dp[i][j] = ways;
+            }
+        }
+
+        out.println(dp[0][0]);
 
         in.close();
         out.close();
