@@ -9,14 +9,37 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
-        long[] dp = new long[n];
-        dp[0] = 3L;
+        int[] a = new int[n];
 
-        for (int i = 1; i < n; i++) {
-            dp[i] = dp[i - 1] * 2;
+        for (int i = 0; i < n; i++) {
+            a[i] = in.nextInt();
         }
 
-        out.println(dp[n - 1]);
+        int[][] dp = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = a[i];
+        }
+
+        for (int d = 1; d <= n - 1; d++) {
+            for (int i = d; i < n; i++) {
+                int j = i - d;
+
+                int movesMade = (n - 1) - d;
+                boolean isFirstPlayerMoves = (movesMade % 2 == 0);
+
+                int up = dp[i - 1][j];
+                int right = dp[i][j + 1];
+
+                if (isFirstPlayerMoves) {
+                    dp[i][j] = Math.max(up, right);
+                } else {
+                    dp[i][j] = Math.min(up, right);
+                }
+            }
+        }
+
+        out.println(dp[n - 1][0]);
 
         in.close();
         out.close();
