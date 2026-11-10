@@ -9,15 +9,16 @@ public class Main {
         PrintWriter out = new PrintWriter(new FileWriter("OUTPUT.TXT"));
 
         int n = in.nextInt();
+        long[] dp = new long[n];
+        dp[0] = 3L;
 
-        int[] dp = new int[n + 1];
-        dp[0] = 1;
-
-        for (int i = 1; i <= n; i++) {
-            dp[i] = dp[i - 1] + i;
+        for (int i = 1; i < n; i++) {
+            dp[i] = dp[i - 1] * 2;
         }
 
-        out.println(dp[n]);
+        out.println(dp[n - 1]);
+
+        in.close();
         out.close();
     }
 }
